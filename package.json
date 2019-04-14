@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/devi99/quiz-webapp/issues"
   },
-  "homepage": "https://github.com/devi99/quiz-webapp#readme"
+  "homepage": "https://github.com/devi99/quiz-webapp#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
 }
