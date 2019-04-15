@@ -181,6 +181,31 @@ class HostScreen{
         // $('#player1Score').find('.score').attr('id',App.Host.players[0].mySocketId);
         // $('#player2Score').find('.score').attr('id',App.Host.players[1].mySocketId);
     }
+
+    /**
+     * Show the word for the current round on screen.
+     * @param data{{round: *, word: *, subtext: *, answer: *,typeMedia: *, urlMedia: *, list: Array}}
+     */
+    newWord(data) {
+        // Insert the new word into the DOM
+        $('#hostWord').html("<h3>" + data.word + "</h3>");
+        $('#hostSubText').text(data.subText);
+        //App.doTextFit('#hostWord');
+        //Insert the Image
+        //console.log(data.typeMedia);
+        if(data.typeMedia == 'pic') {
+            //$('body').css('backgroundImage','url('+data.urlMedia+')');
+            $('#hostMedia').html("<img id='image' class='object-fit_scale-down' src='"+data.urlMedia+"'>");
+        }
+        if(data.typeMedia == 'vid') {
+            $('#hostMedia').html("<div class='embed-container'><iframe id='youtubeplayer' onload='setTimeout(makeVisible, 4000);' src='"+data.urlMedia+"' frameborder='0' gesture='media' allow='autoplay;encrypted-media'></iframe></div>");
+        }
+        $('#image').height( $(window).height() - $("#hostWord").height()- 30 );
+        console.log("update the data");
+        // Update the data for the current round
+        hostScreen.currentCorrectAnswer = data.answer;
+        hostScreen.currentRound = data.round;
+    }
 }       
 
 class PlayerScreen{
@@ -207,7 +232,7 @@ class PlayerScreen{
         ioClient.socket.emit('playerJoinGame', data);
 
         // Set the appropriate properties for the current player.
-        //App.myRole = 'Player';
+        this.myRole = 'Player';
         this.myName = data.playerName;
     }
 
@@ -234,6 +259,59 @@ class PlayerScreen{
         //App.Player.hostSocketId = hostData.mySocketId;
         $('#gameArea')
             .html('<div class="gameOver">Get Ready!</div>');
+    }
+
+
+    /**
+     * Show the list of words for the current round.
+     * @param data{{round: *, word: *, answer: *, list: Array}}
+     */
+    newWord(data) {
+        score_off();
+
+        if (data.typeQuestion == 1){
+            $list=" <div class='info'><label for='inputAnswer'>Your Answer:</label><input id='inputAnswer' type='text' /></div><button id='btnAnswer' class='btnSendAnswer btn'>SEND</button>";
+        }else{
+            console.log('Create an unordered list element');
+            // Create an unordered list element
+            var $list = $('<ul/>').attr('id','ulAnswers');
+
+            // Insert a list item for each word in the word list
+            // received from the server.
+            $.each(data.list, function(){
+                $list                                //  <ul> </ul>
+                    .append( $('<li/>')              //  <ul> <li> </li> </ul>
+                        .append( $('<button/>')      //  <ul> <li> <button> </button> </li> </ul>
+                            .addClass('btnAnswer')   //  <ul> <li> <button class='btnAnswer'> </button> </li> </ul>
+                            .addClass('btn')         //  <ul> <li> <button class='btnAnswer'> </button> </li> </ul>
+                            .val(this)               //  <ul> <li> <button class='btnAnswer' value='word'> </button> </li> </ul>                                                      //  <ul> <li> <button class='btnAnswer' value='word'>word</button> </li> </ul>
+                            .append( $('<div/>')
+                                .addClass('jtextfill')
+                                .append( $('<span/>')
+                                    .html(this)
+                                )
+                            )
+                        )    
+                    )
+            });
+        }
+
+        // Insert the list onto the screen.
+        $('#gameArea').html('<span id="countdownQuestion"></span><input id="inputAnswered" type="text" value="false" style="display:none" />');
+        $('#gameArea').append($list);
+        // Set focus on the input field.
+        $('#inputAnswer').focus();
+
+        var $secondsLeft = $('#countdownQuestion');
+        playerScreen.countDown( $secondsLeft, 10, function(){
+            if($('#inputAnswered').val() == 'false'){
+                if (data.typeQuestion == 1 ){
+                    playerScreen.Player.onPlayerAnswerSubmitClick();
+                }else{
+                    playerScreen.Player.onPlayerAnswerClick('tooLate');
+                }
+            }
+        });
     }
 }      
 
@@ -318,9 +396,11 @@ class IO {
 
         // Change the word for the Host and Player
         //App[App.myRole].newWord(data);
-        //hostScreen.newWord(data);
-        playerScreen.newWord(data);
-
+        if (quiz.roleScreen == 'Host') {
+            hostScreen.newWord(data);
+        }else{
+            playerScreen.newWord(data);
+        }
     }
 }
 
