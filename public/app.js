@@ -317,7 +317,10 @@ class IO {
         hostScreen.currentRound = data.round;
 
         // Change the word for the Host and Player
-        App[App.myRole].newWord(data);
+        //App[App.myRole].newWord(data);
+        //hostScreen.newWord(data);
+        playerScreen.newWord(data);
+
     }
 }
 
