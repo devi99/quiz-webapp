@@ -25,7 +25,7 @@ function getSelectedOptions(sel, fn) {
 function setGenreOptions() {
     let dropdown = $('#selectedGenres');
 
-    var jqxhr = $.get( "/genres/dropdown", function(data) {
+    var jqxhr = $.get( "https://qwizz-api.herokuapp.com/genres/dropdown", function(data) {
         $.each(data.rows, function (key, entry) {
             dropdown.append($('<option></option>').attr('value', entry.id).text(entry.name));
           })
