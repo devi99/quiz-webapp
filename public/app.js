@@ -211,10 +211,22 @@ class HostScreen{
 class PlayerScreen{
     constructor(ioClient) {
         //this.players;
+        this.ioClient = ioClient;
         this.myName = '';
         this.$gameArea  = document.getElementById("gameArea");
         this.gameId = '';
         this.playerName = '';
+        //this.bindEvents();
+
+    }
+    bindEvents() {
+        // Player
+        //App.$doc.on('click', '#btnJoinGame', App.Player.onJoinClick);
+        //App.$doc.on('click', '#btnStart',App.Player.onPlayerStartClick);
+        //$doc.on('click', '#btnAnswer',this.onPlayerAnswerSubmitClick);
+        //App.$doc.on('click', '#btnPlayerRestart', App.Player.onPlayerRestart);
+        //App.$doc.on('click', '#leaderboard', App.onLeaderboardClick);
+        //App.$doc.on('click', '#back', App.onBackClick);
     }
 
     onPlayerStartClick() {
@@ -302,17 +314,92 @@ class PlayerScreen{
         // Set focus on the input field.
         $('#inputAnswer').focus();
 
-        var $secondsLeft = $('#countdownQuestion');
-        playerScreen.countDown( $secondsLeft, 10, function(){
+        let el = document.getElementsByClassName("btnAnswer");
+        for (var i=0; i < el.length; i++) {
+            let p1 = el[i].innerText;
+            el[i].addEventListener("click",function() {
+                playerScreen.onPlayerAnswerClick(p1);
+            });
+        }
+        //el.addEventListener("click", () => { this.onPlayerAnswerClick(); }, false);
+        el = document.getElementById("btnAnswer");
+        el.addEventListener("click", () => { playerScreen.onPlayerAnswerSubmitClick() }, false);
+
+        //var $secondsLeft = $('#countdownQuestion');
+
+        let helpers = new Helpers();
+        helpers.countDown( 'countdownQuestion', 10, function(){
             if($('#inputAnswered').val() == 'false'){
                 if (data.typeQuestion == 1 ){
-                    playerScreen.Player.onPlayerAnswerSubmitClick();
+                    playerScreen.onPlayerAnswerSubmitClick();
                 }else{
-                    playerScreen.Player.onPlayerAnswerClick('tooLate');
+                    playerScreen.onPlayerAnswerClick('tooLate');
                 }
             }
         });
     }
+
+
+    /**
+     *  Click handler for the Player hitting a word in the word list.
+     */
+    onPlayerAnswerClick(Answer) {
+        console.log('Clicked Answer Button');
+        // Stop the timer and do the callback.
+        clearInterval(playerScreen.countdownTimer);
+        //var $btn = $(this);      // the tapped button
+        var answer = Answer === 'tooLate' ? '' : Answer; // The tapped word
+
+        // Replace the answers with a thank you message to prevent further answering
+        $('#gameArea')
+            .html('<div class="gameOver">Thanks!</div>');
+
+        // Set the helperfield to true so we know that the user already answered     
+        $('#inputAnswered').val('true');
+
+        // Send the player info and tapped word to the server so
+        // the host can check the answer.
+        var data = {
+            gameId: playerScreen.gameId,
+            playerId: playerScreen.mySocketId,
+            answer: answer,
+            round: playerScreen.currentRound
+        };
+        //IO.socket.emit('playerAnswer',data);
+        ioClient.socket.emit('playerAnswer',data);
+    }   
+
+    /**
+     *  Click handler for the Player hitting a word in the word list.
+    */
+    onPlayerAnswerSubmitClick() {
+
+        console.log('Clicked Answer Button');
+        // Stop the timer and do the callback.
+        clearInterval(playerScreen.countdownTimer);
+        //var $btn = $(this);      // the tapped button
+        //var answer = $btn.val(); // The tapped word
+        
+        var answer = $('#inputAnswer').val();
+        // Replace the answers with a thank you message to prevent further answering
+        $('#gameArea')
+            .html('<div class="gameOver">Thanks!</div>');
+
+        // Set the helperfield to true so we know that the user already answered     
+        $('#inputAnswered').val('true');
+
+        // Send the player info and tapped word to the server so
+        // the host can check the answer.
+        var data = {
+            gameId: playerScreen.gameId,
+            playerId: playerScreen.mySocketId,
+            answer: answer,
+            round: playerScreen.currentRound
+        };
+
+        ioClient.socket.emit('playerAnswer',data);
+    }
+
 }      
 
 class IO {
@@ -447,6 +534,7 @@ let ioClient = new IO();
 let quiz = new Quiz(ioClient);
 let hostScreen = new HostScreen(ioClient);
 let playerScreen = new PlayerScreen(ioClient);
+//let helpers = new Helpers();
 
 
 console.log('End');
