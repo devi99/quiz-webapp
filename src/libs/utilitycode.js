@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 function getSelectedOptions(sel, fn) {
     var opts = [], opt;
     
@@ -51,7 +53,4 @@ $(window).resize(function(){
 })
 $(window).resize();
 
-function makeVisible() {
-    $('#youtubeplayer').show();
-
-  }
+export { setGenreOptions, getSelectedOptions, score_on, score_off};

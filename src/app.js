@@ -1,9 +1,10 @@
-/* let routes = {
-    '/': homepage,
-    '/portfolio': portfolio,
-    '/work': work,
-    '/contact': contact,
-  }; */
+//import io from 'socket.io'
+import './css/styles.css';
+import $ from 'jquery';
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { setGenreOptions, getSelectedOptions, score_on, score_off} from './libs/utilitycode';
+
 
   (function () {
     var fullPath = window.location.pathname.substr(window.location.pathname.indexOf('/') + 1); // and split it into an array
@@ -83,6 +84,8 @@ class HostScreen{
         this.numPlayersInRoom = 0;
         this.gameId = 0;
         this.currentRound = 0;
+        this.numAnswersGiven = 0;
+        this.currentCorrectAnswer = '';
     }
     processQuizInitData(){
         this.$gameArea  = document.getElementById("gameArea");
@@ -206,6 +209,90 @@ class HostScreen{
         hostScreen.currentCorrectAnswer = data.answer;
         hostScreen.currentRound = data.round;
     }
+    /**
+     * Check the answer clicked by a player.
+     * @param data{{round: *, playerId: *, answer: *, gameId: *}}
+     */
+    checkAnswer(data) {
+        // Verify that the answer clicked is from the current round.
+        // This prevents a 'late entry' from a player whos screen has not
+        // yet updated to the current round.
+        console.log('NumAnswersGiven=' + hostScreen.numAnswersGiven);
+        console.log('currentRound=' + hostScreen.currentRound);
+
+        if (data.round === hostScreen.currentRound){
+
+            // Get the player's score
+            var $pScore = $('#' + data.playerId);
+            var $pIcon = $('#answer-icon' + data.playerId);
+
+            //console.log($pScore);
+            // Advance player's score if it is correct
+            var answerGiven = data.answer.toLowerCase().replace(/\s+/g, '') ;
+            var answerCorrect = hostScreen.currentCorrectAnswer.toLowerCase().replace(/\s+/g, '') ;
+            if( answerCorrect === answerGiven ) {
+
+                // Add 5 to the player's score
+                $pScore.text( +$pScore.text() + 1);
+                $pIcon.removeClass("glyphicon glyphicon-question-sign");
+                $pIcon.removeClass("glyphicon glyphicon-remove");   
+                $pIcon.addClass("glyphicon glyphicon-ok");  
+                
+                //Increment Answered Players
+                hostScreen.numAnswersGiven +=1;
+
+            } else {
+                // A wrong answer was submitted, so decrement the player's score.
+                $pScore.text( +$pScore.text());
+                $pIcon.removeClass("glyphicon glyphicon-question-sign");
+                $pIcon.removeClass("glyphicon glyphicon-ok");
+                $pIcon.addClass("glyphicon glyphicon-remove");   
+                //Increment Answered Players
+                hostScreen.numAnswersGiven +=1;
+            }
+
+            // Prepare data to send to the server
+            var newdata = {
+                gameId : hostScreen.gameId,
+                round : hostScreen.currentRound,
+                gameOver: false
+            }
+            console.log('data.round=' + newdata.round);
+            var playerObject = hostScreen.players.filter( obj => obj.mySocketId === data.playerId)[0];
+            playerObject.playerScore++;
+            //Check whether everybody answered so we can progress to the next round
+            if(hostScreen.numPlayersInRoom == hostScreen.numAnswersGiven){
+                $('#Answer').html('Het juiste antwoord was <b>' + hostScreen.currentCorrectAnswer + '</b>');
+                console.log("Next Round !");
+                // Advance the round
+                hostScreen.currentRound += 1;
+                newdata.round = hostScreen.currentRound;
+                hostScreen.numAnswersGiven = 0;
+
+                if(hostScreen.numQuestions == hostScreen.currentRound){
+                    //IO.sockets.in(data.gameId).emit('gameOver',data);
+                    //IO.socket.emit('hostGameOver',data);
+                    newdata.gameOver = true;
+                }
+                //console.log(data);
+                score_on();
+
+                // Countdown 10 seconds for next question
+                let helpers = new Helpers();
+                helpers.countDown( 'countdownOverlay', 10, function(){
+                    ioClient.socket.emit('hostNextRound',newdata);
+                    score_off();    
+                });
+                
+                // var $secondsLeft = $('#countdownOverlay');
+                // hostScreen.countDown( $secondsLeft, 5, function(){
+                //     IO.socket.emit('hostNextRound',newdata);
+                //     score_off();
+                // });
+            }
+        }
+    }
+    
 }       
 
 class PlayerScreen{
@@ -216,6 +303,7 @@ class PlayerScreen{
         this.$gameArea  = document.getElementById("gameArea");
         this.gameId = '';
         this.playerName = '';
+        this.currentRound = 0;
         //this.bindEvents();
 
     }
@@ -246,6 +334,7 @@ class PlayerScreen{
         // Set the appropriate properties for the current player.
         this.myRole = 'Player';
         this.myName = data.playerName;
+        
     }
 
      /**
@@ -279,11 +368,26 @@ class PlayerScreen{
      * @param data{{round: *, word: *, answer: *, list: Array}}
      */
     newWord(data) {
+        //set currentRound
+        this.currentRound = data.round;
+
         score_off();
 
+
+        $('#gameArea').html('<span id="countdownQuestion"></span><input id="inputAnswered" type="text" value="false" style="display:none" />');
+            
         if (data.typeQuestion == 1){
-            $list=" <div class='info'><label for='inputAnswer'>Your Answer:</label><input id='inputAnswer' type='text' /></div><button id='btnAnswer' class='btnSendAnswer btn'>SEND</button>";
+
+            $answerField=" <div class='info'><label for='inputAnswer'>Your Answer:</label><input id='inputAnswer' type='text' /></div><button id='btnAnswer' class='btnSendAnswer btn'>SEND</button>";
+            $('#gameArea').append($answerField);
+
+            // Set focus on the input field.
+            $('#inputAnswer').focus();                
+            let el = document.getElementById("btnAnswer");
+            el.addEventListener("click", () => { playerScreen.onPlayerAnswerSubmitClick(); }, false);   
+
         }else{
+
             console.log('Create an unordered list element');
             // Create an unordered list element
             var $list = $('<ul/>').attr('id','ulAnswers');
@@ -306,24 +410,19 @@ class PlayerScreen{
                         )    
                     )
             });
+
+            // Insert the list onto the screen.
+            $('#gameArea').append($list);
+
+            let el = document.getElementsByClassName("btnAnswer");
+            for (var i=0; i < el.length; i++) {
+                let p1 = el[i].innerText;
+                el[i].addEventListener("click",function() {
+                    playerScreen.onPlayerAnswerClick(p1);
+                });
+            }
         }
 
-        // Insert the list onto the screen.
-        $('#gameArea').html('<span id="countdownQuestion"></span><input id="inputAnswered" type="text" value="false" style="display:none" />');
-        $('#gameArea').append($list);
-        // Set focus on the input field.
-        $('#inputAnswer').focus();
-
-        let el = document.getElementsByClassName("btnAnswer");
-        for (var i=0; i < el.length; i++) {
-            let p1 = el[i].innerText;
-            el[i].addEventListener("click",function() {
-                playerScreen.onPlayerAnswerClick(p1);
-            });
-        }
-        //el.addEventListener("click", () => { this.onPlayerAnswerClick(); }, false);
-        el = document.getElementById("btnAnswer");
-        el.addEventListener("click", () => { playerScreen.onPlayerAnswerSubmitClick() }, false);
 
         //var $secondsLeft = $('#countdownQuestion');
 
@@ -338,7 +437,6 @@ class PlayerScreen{
             }
         });
     }
-
 
     /**
      *  Click handler for the Player hitting a word in the word list.
@@ -361,7 +459,7 @@ class PlayerScreen{
         // the host can check the answer.
         var data = {
             gameId: playerScreen.gameId,
-            playerId: playerScreen.mySocketId,
+            playerId: playerScreen.ioClient.socket.id,
             answer: answer,
             round: playerScreen.currentRound
         };
@@ -392,7 +490,7 @@ class PlayerScreen{
         // the host can check the answer.
         var data = {
             gameId: playerScreen.gameId,
-            playerId: playerScreen.mySocketId,
+            playerId: playerScreen.ioClient.socket.id,
             answer: answer,
             round: playerScreen.currentRound
         };
@@ -416,7 +514,7 @@ class IO {
         this.socket.on('playerJoinedRoom', this.playerJoinedRoom );
         this.socket.on('beginNewGame', this.beginNewGame );
         this.socket.on('newWordData', this.onNewWordData);
-        // this.socket.on('hostCheckAnswer', this.hostCheckAnswer);
+        this.socket.on('hostCheckAnswer', this.hostCheckAnswer);
         // this.socket.on('gameOver', this.gameOver);
         // this.socket.on('error', this.error );
         // this.socket.on('showLeader',this.showLeader);
@@ -489,6 +587,14 @@ class IO {
             playerScreen.newWord(data);
         }
     }
+
+    /**
+     * A player answered. If this is the host, check the answer.
+     * @param data
+     */
+    hostCheckAnswer(data) {
+        hostScreen.checkAnswer(data);
+    }    
 }
 
 class Helpers {
