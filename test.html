@@ -1,1 +1,44 @@
-<h1>blabla</h1>
+<div id="hostMedia" class="col-sm-12">
+  <div class="embed-container">
+    <iframe id="youtubeplayer" 
+        onload="setTimeout(makeVisible, 6000);" 
+        src="https://www.youtube.com/embed/pJif4i9NRdI?rel=0&amp;controls=0&amp;showinfo=0&amp;start=30&amp;autoplay=1" 
+        frameborder="0" 
+        gesture="media" 
+        allow="autoplay;encrypted-media" 
+        style="display: block;">
+    </iframe>
+  </div>
+</div>
+<div id="playerScores" onclick="score_off()" style="display: block;">
+    <h3 id="Answer">And the winner is <b></b></h3>
+    <h2 id="countdownOverlay">0</h2>
+  <div id="player0" class="row playerScore">
+    <span class="score">
+      <i id="answer-iconBcud7OCNSwrVWqrjAABF" class="glyphicon glyphicon-ok"></i>
+    </span>
+    <span id="Bcud7OCNSwrVWqrjAABF" class="score finalscore">1</span>
+    <span class="playerName">davy</span>
+  </div>
+</div>
+    <script>
+        var scoreboard = [];
+        var winnerName ='';
+        var winnerScore = -1;
+        
+        $( ".playerScore" ).each(function( index ) {
+            console.log( index + ": " + $( this ).text().finalescore );
+            scoreboard.push($( this ).text(),$( this ).score);
+            // Find the winner based on the scores
+            if (Number($(this).score) > winnerScore){
+                winnerName = $( this ).text();
+                winnerScore = Number($(this).score);
+            }
+            });     
+            console.log( winnerName );
+
+        function makeVisible() {
+          document.getElementById('youtubeplayer').style.visibility = "visible";
+        }
+    </script>
+    

@@ -1,7 +1,7 @@
 //import io from 'socket.io'
+import 'bootstrap';
 import './css/styles.css';
 import $ from 'jquery';
-import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { setGenreOptions, getSelectedOptions, score_on, score_off} from './libs/utilitycode';
 
@@ -177,7 +177,7 @@ class HostScreen{
         
         $.each(this.players, function(index,value){
             $('#playerScores')
-                .append('<div id="player'+ index++ +'" class="row playerScore"><span class="score"><i id="answer-icon'+ value.mySocketId +'" class="glyphicon glyphicon-question-sign"></i></span><span id="'+ value.mySocketId +'" class="score">0</span><span class="playerName">'+ value.playerName +'</span></div>');
+                .append('<div id="player'+ index++ +'" class="row playerScore" data-score="0" data-playername="'+ value.playerName +'" ><span class="score"><i id="answer-icon'+ value.mySocketId +'" class="glyphicon glyphicon-question-sign"></i></span><span id="'+ value.mySocketId +'" class="score">0</span><span class="playerName">'+ value.playerName +'</span></div>');
         });
 
         // Set the Score section on screen to 0 for each player.
@@ -201,7 +201,7 @@ class HostScreen{
             $('#hostMedia').html("<img id='image' class='object-fit_scale-down' src='"+data.urlMedia+"'>");
         }
         if(data.typeMedia == 'vid') {
-            $('#hostMedia').html("<div class='embed-container'><iframe id='youtubeplayer' onload='setTimeout(makeVisible, 4000);' src='"+data.urlMedia+"' frameborder='0' gesture='media' allow='autoplay;encrypted-media'></iframe></div>");
+            $('#hostMedia').html("<div class='embed-container'><iframe id='youtubeplayer' src='"+data.urlMedia+"' frameborder='0' gesture='media' allow='autoplay;encrypted-media'></iframe><div class='bar'></div></div>");
         }
         $('#image').height( $(window).height() - $("#hostWord").height()- 30 );
         console.log("update the data");
@@ -234,6 +234,8 @@ class HostScreen{
 
                 // Add 5 to the player's score
                 $pScore.text( +$pScore.text() + 1);
+                $pScore.attr('data-score', $pScore.text());
+                //$pScore[0].setAttribute('data-score', $pScore.text() + 1);
                 $pIcon.removeClass("glyphicon glyphicon-question-sign");
                 $pIcon.removeClass("glyphicon glyphicon-remove");   
                 $pIcon.addClass("glyphicon glyphicon-ok");  
@@ -292,6 +294,51 @@ class HostScreen{
             }
         }
     }
+
+
+    /**
+     * All 10 rounds have played out. End the game.
+     * @param data
+     */
+    endGame(data) {
+        score_on();
+        var scoreboard = [];
+        var winnerName ='';
+        var winnerScore = -1;
+        
+        $( ".playerScore" ).each(function( index ) { 
+            console.log( index + ": " + this.children[1].getAttribute('data-score') + "&&&" + $( this ).attr('data-playername')  );
+            scoreboard.push($( this ).text(),$( this ).score);
+            // Find the winner based on the scores
+            if (Number(this.children[1].getAttribute('data-score') ) > winnerScore){
+                winnerName = $( this ).attr('data-playername') ;
+                winnerScore = Number(this.children[1].getAttribute('data-score') );
+            }
+            });                  
+
+
+        
+        //Clear the Game screen
+        $('#hostMedia').html("");
+        $('#Answer').html('And the winner is <b>' + winnerName + '</b>');
+        $('#countdownOverlay').html('with ' + winnerScore + ' points</b>');
+
+        //App.doTextFit('#hostWord');
+        //data.winner=winnerName;
+        //if(data.done>0)
+        //{
+
+        //}
+        //else data.done=0;
+        //console.log(data);
+        //IO.socket.emit("clientEndGame",data);
+        // Reset game data
+        //hostScreen.numPlayersInRoom = 0;
+        //hostScreen.isNewGame = true;
+        //IO.socket.emit('hostNextRound',data);
+        // Reset game data
+    }
+
     
 }       
 
@@ -304,6 +351,8 @@ class PlayerScreen{
         this.gameId = '';
         this.playerName = '';
         this.currentRound = 0;
+        this.helpers = new Helpers();
+
         //this.bindEvents();
 
     }
@@ -373,12 +422,11 @@ class PlayerScreen{
 
         score_off();
 
-
         $('#gameArea').html('<span id="countdownQuestion"></span><input id="inputAnswered" type="text" value="false" style="display:none" />');
             
         if (data.typeQuestion == 1){
 
-            $answerField=" <div class='info'><label for='inputAnswer'>Your Answer:</label><input id='inputAnswer' type='text' /></div><button id='btnAnswer' class='btnSendAnswer btn'>SEND</button>";
+            var $answerField = " <div class='info'><label for='inputAnswer'>Your Answer:</label><input id='inputAnswer' type='text' /></div><button id='btnAnswer' class='btnSendAnswer btn'>SEND</button>";
             $('#gameArea').append($answerField);
 
             // Set focus on the input field.
@@ -426,8 +474,7 @@ class PlayerScreen{
 
         //var $secondsLeft = $('#countdownQuestion');
 
-        let helpers = new Helpers();
-        helpers.countDown( 'countdownQuestion', 10, function(){
+        this.helpers.countDown( 'countdownQuestion', 20, function(){
             if($('#inputAnswered').val() == 'false'){
                 if (data.typeQuestion == 1 ){
                     playerScreen.onPlayerAnswerSubmitClick();
@@ -443,8 +490,10 @@ class PlayerScreen{
      */
     onPlayerAnswerClick(Answer) {
         console.log('Clicked Answer Button');
+
         // Stop the timer and do the callback.
-        clearInterval(playerScreen.countdownTimer);
+        clearInterval(this.helpers.countdownTimerId);
+
         //var $btn = $(this);      // the tapped button
         var answer = Answer === 'tooLate' ? '' : Answer; // The tapped word
 
@@ -474,7 +523,8 @@ class PlayerScreen{
 
         console.log('Clicked Answer Button');
         // Stop the timer and do the callback.
-        clearInterval(playerScreen.countdownTimer);
+        clearInterval(this.helpers.countdownTimerId);
+
         //var $btn = $(this);      // the tapped button
         //var answer = $btn.val(); // The tapped word
         
@@ -498,6 +548,21 @@ class PlayerScreen{
         ioClient.socket.emit('playerAnswer',data);
     }
 
+    /**
+     * Show the "Game Over" screen.
+     */
+    endGame() {
+        $('#gameArea')
+            .html('<div class="gameOver">Game Over!</div>')
+            .append(
+                // Create a button to start a new game.
+                $('<button>Start Again</button>')
+                    .attr('id','btnPlayerRestart')
+                    .addClass('btn')
+                    .addClass('btnGameOver')
+            );
+    }    
+
 }      
 
 class IO {
@@ -515,7 +580,7 @@ class IO {
         this.socket.on('beginNewGame', this.beginNewGame );
         this.socket.on('newWordData', this.onNewWordData);
         this.socket.on('hostCheckAnswer', this.hostCheckAnswer);
-        // this.socket.on('gameOver', this.gameOver);
+        this.socket.on('gameOver', this.gameOver);
         // this.socket.on('error', this.error );
         // this.socket.on('showLeader',this.showLeader);
     }
@@ -593,12 +658,28 @@ class IO {
      * @param data
      */
     hostCheckAnswer(data) {
-        hostScreen.checkAnswer(data);
-    }    
+        if (quiz.roleScreen == 'Host') {
+            hostScreen.checkAnswer(data);
+        }
+
+    }
+
+    /**
+     * Let everyone know the game has ended.
+     * @param data
+     */
+    gameOver(data) {
+        if (quiz.roleScreen == 'Host') {
+            hostScreen.endGame(data);
+        }else{
+            playerScreen.endGame(data);
+        }
+    }
 }
 
 class Helpers {
     constructor(){
+        this.countdownTimerId = 0;
     }
 
     /**
@@ -632,6 +713,8 @@ class Helpers {
                 return;
             }
         },1000);
+
+        this.countdownTimerId = countdownTimer;
     }
 
 }
@@ -640,7 +723,6 @@ let ioClient = new IO();
 let quiz = new Quiz(ioClient);
 let hostScreen = new HostScreen(ioClient);
 let playerScreen = new PlayerScreen(ioClient);
-//let helpers = new Helpers();
 
 
 console.log('End');

@@ -4584,7 +4584,7 @@ exports.push([module.i, "/*!\n * Bootstrap v4.3.1 (https://getbootstrap.com/)\n 
 
 exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, "/*\n\n Dark Green : #78BD4C\n  Mid Green : #A8FF56\n       Lite : #ECFFE0\nDark Purple : #A22FB0\n\n*/\n\nhtml, body {\n    background-color: rgb(255, 255, 255);\n    background-size:contain;\n    background-repeat: no-repeat;\n    height: 100%;\n    width: 100%;\n    margin: 0;\n    padding: 0;\n}\n\n\n\n/* ******************************\n              BUTTONS!\n     (Inspired by Bootstrap 3.0)\n   ****************************** */\n\n.btn {\n    height: 100%;\n    width: 49%;\n    margin-bottom: 0;\n    color: #ECFFE0;\n    font-family: 'Quicksand', sans-serif;\n    font-weight: 700;\n    font-size: 2em;\n    line-height: 1.2;\n    text-align: center;\n    background-color: #8AD453;\n    vertical-align: middle;\n    cursor: pointer;\n    border: .1em solid transparent;\n    -webkit-user-select: none;\n    -moz-user-select: none;\n    -ms-user-select: none;\n    -o-user-select: none;\n    user-select: none;\n}\n\n.btn:focus {\n    outline: thin dotted #333;\n    outline: 5px auto -webkit-focus-ring-color;\n    outline-offset: -2px;\n}\n\n.btn:hover,\n.btn:focus {\n    color: #AE37B2;\n    text-decoration: none;\n}\n\n.btn:active,\n.btn.active {\n    outline: 0;\n    -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);\n    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);\n}\n\n.left {\n    float: left;\n}\n\n.right {\n    float: right;\n}\n\n/* ******************************\n          TITLE SCREEN\n     (intro-screen-template)\n   ****************************** */\n\n#gameArea {\n    height: 100%;\n    width: 100%;\n}\n\n.titleWrapper {\n    font-family: 'Quicksand', sans-serif;\n    font-weight: 400;\n    /* position: absolute; */\n    height: 50%;\n    width: 96%;\n    margin: auto;\n    bottom: 0;\n    left: 0;\n    top: 0;\n    right: 0;\n}\n\n.title {\n    margin: 0px auto;\n    text-align: center;\n    width: 100%;\n    font-family: 'Quicksand', sans-serif;\n    color: rgb(87, 109, 74);\n    font-weight: 300;\n    font-size:8em;\n}\n\n.buttons {\n    width: 100%;\n    text-align: center;\n}\n\n/* ******************************\n          START SCREEN\n     (create-game-template)\n   ****************************** */\n\n.createGameWrapper, .joinGameWrapper, .gameOver, .startGameWrapper {\n    font-family: 'Quicksand', sans-serif;\n    margin: 0 auto;\n    text-align: center;\n}\n\n.createGameWrapper .info, .startGameWrapper .info{\n    color: rgb(113, 168, 78);\n    font-weight: 400;\n    font-size: 2em;\n    margin-top: 1.5em;\n}\n\n.createGameWrapper, .startGameWrapper{\n    color: #AE37B2;\n    font-weight: 300;\n}\n\n.info label {\n    display: block;\n}\n\n.info input {\n    text-align: center;\n    padding: 1em;\n    width: 50%;\n    height: 25%;\n    font-family: 'Quicksand', sans-serif;\n    color: #A22FB0;\n    font-weight: 300;\n    font-size: 1em;\n    border: .1em dotted rgb(167, 219, 179);\n    border-radius: 2%;\n    background: transparent;\n}\n\n.info input#inputPlayerName {\n    width: 90%;\n}\n.info input#inputAnswer {\n    width: 100%;\n}\n\n/* ******************************\n           JOIN SCREEN\n      (join-game-template)\n   ****************************** */\n\n.joinGameWrapper {\n    margin: 0;\n    padding: 0;\n    height: 100%;\n    min-height: 320px;\n}\n\n.joinGameWrapper .info {\n    font-size: 1.5em;\n    color: rgb(68, 97, 50);\n    height: 30%;\n    padding-top: 1%;\n}\n\n.joinGameWrapper .btn {\n    width: 100%;\n    height: 50%;\n}\n\n#playerWaitingMessage {\n    font-size: .8em;\n}\n\n.startGameWrapper #gameURL {\n    font-size: 4em;\n}\n.createGameWrapper {\n    font-size: 1em;\n}\n.startGameWrapper .gameId {\n    font-size: 8em;\n}\n/* .createGameWrapper, .startGameWrapper .gameId {\n    font-size: 8em;\n} */\n\n\n\n/* ******************************\n          PLAYER GAME SCREEN\n\n   ****************************** */\n\n\n#ulAnswers {\n    width: 100%;\n    height: 100%;\n    margin: 0;\n    padding: 0;\n}\n\n#ulAnswers li {\n    width: 100%;\n    height: 16.6%;\n}\n\n.btnAnswer {\n    width: 100%;\n    border-bottom: 1px dotted white;\n    font-weight: 400;\n    /* font-size: 3em; */\n    font-size: 5.9vw;\n    color: #AE37B2;\n}\n\n.btnSendAnswer {\n    width: 100%;\n    border-bottom: 1px dotted white;\n    font-weight: 400;\n    /* font-size: 3em; */\n    font-size: 5.9vw;\n    color: #AE37B2;\n}\n\n#countdownQuestion{\n    width: 100%;\n    height: 5%;\n    margin: 0;\n    padding: 0;\n    vertical-align: middle;\n    text-align: center;\n    font-weight: bolder;\n    font-size: larger;\n}\n\n\n/* ******************************\n            HOST SCREEN\n       (host-game-template)\n   ****************************** */\n\n/* Absolute Centering: http://coding.smashingmagazine.com/2013/08/09/absolute-horizontal-vertical-centering-css/ */\n#wordArea {\n    font-family: 'Quicksand', sans-serif;\n    font-weight: 400;\n    /* position: absolute; */\n    height: 100%;\n    /*width: 50%;*/\n    margin: auto;\n    bottom: 0;\n    left: 0;\n    top: 0;\n    right: 0;\n}\n\n#hostWord {\n    height: 50%;\n    width: 100%;\n    font-family: 'Quicksand', sans-serif;    \n    /* font-size: 2.5EM; */\n}\n#hostMedia {\n    height: 50%;\n    width: 100%;\n    font-family: 'Quicksand', sans-serif;    \n    font-size: 2.5EM;\n    text-align: center;\n}\n\n#hostWord h2, #btnPlayerRestart h3 {\n    font-size: 3em;\n    line-height: 1em;\n    font-family: 'Quicksand', sans-serif;\n    font-weight: 400;\n    margin: 0;\n    padding: 0;\n    text-transform: uppercase;\n}\n\n #playerScores {\n    position: fixed;\n    display: none;\n    width: 100%;\n    height: 100%;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    background-color: rgba(0,0,0,0.5);\n    z-index: 2;\n    cursor: pointer;\n}\n\n\n.playerScore {\n    width: 100%;\n    padding: 4px;\n    margin: 0;\n    font-family: 'Quicksand', sans-serif;\n    font-weight: 400;\n    /* height: 100%; */\n}\n\n.playerScore span {\n    display: inline-block;\n    font-size: 1.4EM;\n    padding: 2%;\n    min-width: 10%;\n    margin: 0;\n}\n\n.playerScore .score {\n    text-align: center;\n    background-color: #A8FF56;\n}\n\n.playerScore .playerName {\n    width: 77%;\n    background-color: #ECFFE0;\n}\n#Answer{\n    color:white;\n    text-align: center;\n}\n#countdownOverlay{\n    color:white;\n    text-align: center;\n}\n\n.embed-container { \n    position: relative; \n    padding-bottom: 56.25%; \n    height: 0; \n    overflow: hidden; \n    max-width: 100%; \n} \n.embed-container iframe, .embed-container object, .embed-container embed { \n    position: absolute;\n    top: 0;\n    left: 0; \n    width: 100%; \n    height: 100%; \n    display: none;\n}\nimg {\n    background-color: #444;\n    width: 100%;\n    /* display: grid;\n    height: 100%; */\n}\n.object-fit_fill { object-fit: fill }\n.object-fit_contain { object-fit: contain }\n.object-fit_cover { object-fit: cover }\n.object-fit_none { object-fit: none }\n.object-fit_scale-down { object-fit: scale-down }\n\n/* ******************************\n          TITLE SCREEN\n     (intro-screen-template)\n   ****************************** */\n\n.gameOver {\n    display: block;\n    height: 20%;\n    padding-top: 10%;\n    font-size: 2em;\n}\n.btnGameOver {\n    width: 100%;\n    height: 10%;\n    position: fixed;\n    bottom: 0;\n}\n#tablearea{\n  text-align:center;\n  width:50%;\n  margin:0 auto;\n}\n#mid{\n\n  margin-top:2%;\n  width:100%;\n  text-align:center;\n}\n#banner{\n  text-align: center;\n  font-size: 4em;\n}\ntable{\n  width:100%;\n}\ntr{\n  width:100%;\n}\ntd,th{\n  width:50%;\n  text-align: center;\n  border-bottom:0.1em solid black;\n  font-size: 2em;\n\n}\ntr:nth-child(even) {\n  background: #333300 ;\n  color:white;\n}\ntr:nth-child(odd) {\n  background: #336600 ;\n  color:white;\n}\n", ""]);
+exports.push([module.i, "/*\n\n Dark Green : #78BD4C\n  Mid Green : #A8FF56\n       Lite : #ECFFE0\nDark Purple : #A22FB0\n\n*/\n\nhtml, body {\n    background-color: rgb(255, 255, 255);\n    background-size:contain;\n    background-repeat: no-repeat;\n    height: 100%;\n    width: 100%;\n    margin: 0;\n    padding: 0;\n}\n\n\n\n/* ******************************\n              BUTTONS!\n     (Inspired by Bootstrap 3.0)\n   ****************************** */\n\n.btn {\n    height: 100%;\n    width: 49%;\n    margin-bottom: 0;\n    color: #ECFFE0;\n    font-family: 'Quicksand', sans-serif;\n    font-weight: 700;\n    font-size: 2em;\n    line-height: 1.2;\n    text-align: center;\n    background-color: #8AD453;\n    vertical-align: middle;\n    cursor: pointer;\n    border: .1em solid transparent;\n    -webkit-user-select: none;\n    -moz-user-select: none;\n    -ms-user-select: none;\n    -o-user-select: none;\n    user-select: none;\n}\n\n.btn:focus {\n    outline: thin dotted #333;\n    outline: 5px auto -webkit-focus-ring-color;\n    outline-offset: -2px;\n}\n\n.btn:hover,\n.btn:focus {\n    color: #AE37B2;\n    text-decoration: none;\n}\n\n.btn:active,\n.btn.active {\n    outline: 0;\n    -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);\n    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);\n}\n\n.left {\n    float: left;\n}\n\n.right {\n    float: right;\n}\n\n/* ******************************\n          TITLE SCREEN\n     (intro-screen-template)\n   ****************************** */\n\n#gameArea {\n    height: 100%;\n    width: 100%;\n}\n\n.titleWrapper {\n    font-family: 'Quicksand', sans-serif;\n    font-weight: 400;\n    /* position: absolute; */\n    height: 50%;\n    width: 96%;\n    margin: auto;\n    bottom: 0;\n    left: 0;\n    top: 0;\n    right: 0;\n}\n\n.title {\n    margin: 0px auto;\n    text-align: center;\n    width: 100%;\n    font-family: 'Quicksand', sans-serif;\n    color: rgb(87, 109, 74);\n    font-weight: 300;\n    font-size:8em;\n}\n\n.buttons {\n    width: 100%;\n    text-align: center;\n}\n\n/* ******************************\n          START SCREEN\n     (create-game-template)\n   ****************************** */\n\n.createGameWrapper, .joinGameWrapper, .gameOver, .startGameWrapper {\n    font-family: 'Quicksand', sans-serif;\n    margin: 0 auto;\n    text-align: center;\n}\n\n.createGameWrapper .info, .startGameWrapper .info{\n    color: rgb(113, 168, 78);\n    font-weight: 400;\n    font-size: 2em;\n    margin-top: 1.5em;\n}\n\n.createGameWrapper, .startGameWrapper{\n    color: #AE37B2;\n    font-weight: 300;\n}\n\n.info label {\n    display: block;\n}\n\n.info input {\n    text-align: center;\n    padding: 1em;\n    width: 50%;\n    height: 25%;\n    font-family: 'Quicksand', sans-serif;\n    color: #A22FB0;\n    font-weight: 300;\n    font-size: 1em;\n    border: .1em dotted rgb(167, 219, 179);\n    border-radius: 2%;\n    background: transparent;\n}\n\n.info input#inputPlayerName {\n    width: 90%;\n}\n.info input#inputAnswer {\n    width: 100%;\n}\n\n/* ******************************\n           JOIN SCREEN\n      (join-game-template)\n   ****************************** */\n\n.joinGameWrapper {\n    margin: 0;\n    padding: 0;\n    height: 100%;\n    min-height: 320px;\n}\n\n.joinGameWrapper .info {\n    font-size: 1.5em;\n    color: rgb(68, 97, 50);\n    height: 30%;\n    padding-top: 1%;\n}\n\n.joinGameWrapper .btn {\n    width: 100%;\n    height: 50%;\n}\n\n#playerWaitingMessage {\n    font-size: .8em;\n}\n\n.startGameWrapper #gameURL {\n    font-size: 4em;\n}\n.createGameWrapper {\n    font-size: 1em;\n}\n.startGameWrapper .gameId {\n    font-size: 8em;\n}\n/* .createGameWrapper, .startGameWrapper .gameId {\n    font-size: 8em;\n} */\n\n\n\n/* ******************************\n          PLAYER GAME SCREEN\n\n   ****************************** */\n\n\n#ulAnswers {\n    width: 100%;\n    height: 100%;\n    margin: 0;\n    padding: 0;\n}\n\n#ulAnswers li {\n    width: 100%;\n    height: 16.6%;\n}\n\n.btnAnswer {\n    width: 100%;\n    border-bottom: 1px dotted white;\n    font-weight: 400;\n    /* font-size: 3em; */\n    font-size: 5.9vw;\n    color: #AE37B2;\n}\n\n.btnSendAnswer {\n    width: 100%;\n    border-bottom: 1px dotted white;\n    font-weight: 400;\n    /* font-size: 3em; */\n    font-size: 5.9vw;\n    color: #AE37B2;\n}\n\n#countdownQuestion{\n    width: 100%;\n    height: 5%;\n    margin: 0;\n    padding: 0;\n    vertical-align: middle;\n    text-align: center;\n    font-weight: bolder;\n    font-size: larger;\n}\n\n\n/* ******************************\n            HOST SCREEN\n       (host-game-template)\n   ****************************** */\n\n/* Absolute Centering: http://coding.smashingmagazine.com/2013/08/09/absolute-horizontal-vertical-centering-css/ */\n#wordArea {\n    font-family: 'Quicksand', sans-serif;\n    font-weight: 400;\n    /* position: absolute; */\n    height: 100%;\n    /*width: 50%;*/\n    margin: auto;\n    bottom: 0;\n    left: 0;\n    top: 0;\n    right: 0;\n}\n\n#hostWord {\n    height: 50%;\n    width: 100%;\n    font-family: 'Quicksand', sans-serif;    \n    /* font-size: 2.5EM; */\n}\n#hostMedia {\n    height: 50%;\n    width: 100%;\n    font-family: 'Quicksand', sans-serif;    \n    font-size: 2.5EM;\n    text-align: center;\n}\n\n#hostWord h2, #btnPlayerRestart h3 {\n    font-size: 3em;\n    line-height: 1em;\n    font-family: 'Quicksand', sans-serif;\n    font-weight: 400;\n    margin: 0;\n    padding: 0;\n    text-transform: uppercase;\n}\n\n #playerScores {\n    position: fixed;\n    display: none;\n    width: 100%;\n    height: 100%;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    background-color: rgba(0,0,0,0.5);\n    z-index: 2;\n    cursor: pointer;\n}\n\n\n.playerScore {\n    width: 100%;\n    padding: 4px;\n    margin: 0;\n    font-family: 'Quicksand', sans-serif;\n    font-weight: 400;\n    /* height: 100%; */\n}\n\n.playerScore span {\n    display: inline-block;\n    font-size: 1.4EM;\n    padding: 2%;\n    min-width: 10%;\n    margin: 0;\n}\n\n.playerScore .score {\n    text-align: center;\n    background-color: #A8FF56;\n}\n\n.playerScore .playerName {\n    width: 77%;\n    background-color: #ECFFE0;\n}\n#Answer{\n    color:white;\n    text-align: center;\n}\n#countdownOverlay{\n    color:white;\n    text-align: center;\n}\n\n.embed-container { \n    position: relative; \n    padding-bottom: 56.25%; \n    height: 0; \n    overflow: hidden; \n    max-width: 100%; \n} \n.embed-container iframe, .embed-container object, .embed-container embed { \n    position: absolute;\n    top: 0;\n    left: 0; \n    width: 100%; \n    height: 100%; \n    /* display: none; */\n}\n.bar{\n    position:absolute;\n    top:0;\n    left:0;\n    width:100%;\n    height:50px;\n    background-color: white;\n}\nimg {\n    background-color: #444;\n    width: 100%;\n    /* display: grid;\n    height: 100%; */\n}\n.object-fit_fill { object-fit: fill }\n.object-fit_contain { object-fit: contain }\n.object-fit_cover { object-fit: cover }\n.object-fit_none { object-fit: none }\n.object-fit_scale-down { object-fit: scale-down }\n\n/* ******************************\n          TITLE SCREEN\n     (intro-screen-template)\n   ****************************** */\n\n.gameOver {\n    display: block;\n    height: 20%;\n    padding-top: 10%;\n    font-size: 2em;\n}\n.btnGameOver {\n    width: 100%;\n    height: 10%;\n    position: fixed;\n    bottom: 0;\n}\n#tablearea{\n  text-align:center;\n  width:50%;\n  margin:0 auto;\n}\n#mid{\n\n  margin-top:2%;\n  width:100%;\n  text-align:center;\n}\n#banner{\n  text-align: center;\n  font-size: 4em;\n}\ntable{\n  width:100%;\n}\ntr{\n  width:100%;\n}\ntd,th{\n  width:50%;\n  text-align: center;\n  border-bottom:0.1em solid black;\n  font-size: 2em;\n\n}\ntr:nth-child(even) {\n  background: #333300 ;\n  color:white;\n}\ntr:nth-child(odd) {\n  background: #336600 ;\n  color:white;\n}\n", ""]);
 
 
 /***/ }),
@@ -18467,12 +18467,12 @@ module.exports = g;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _css_styles_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./css/styles.css */ "./src/css/styles.css");
-/* harmony import */ var _css_styles_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_css_styles_css__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
-/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(bootstrap__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
+/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(bootstrap__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _css_styles_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./css/styles.css */ "./src/css/styles.css");
+/* harmony import */ var _css_styles_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_css_styles_css__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var bootstrap_dist_css_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! bootstrap/dist/css/bootstrap.min.css */ "./node_modules/bootstrap/dist/css/bootstrap.min.css");
 /* harmony import */ var bootstrap_dist_css_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(bootstrap_dist_css_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _libs_utilitycode__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./libs/utilitycode */ "./src/libs/utilitycode.js");
@@ -18519,15 +18519,15 @@ function () {
   _createClass(Quiz, [{
     key: "cacheElements",
     value: function cacheElements() {
-      this.$doc = jquery__WEBPACK_IMPORTED_MODULE_1___default()(document); //this.$gameArea = $('#gameArea');
+      this.$doc = jquery__WEBPACK_IMPORTED_MODULE_2___default()(document); //this.$gameArea = $('#gameArea');
 
       this.$gameArea = document.getElementById("gameArea");
-      this.$templateIntroScreen = jquery__WEBPACK_IMPORTED_MODULE_1___default()('#intro-screen-template').html();
-      this.$templateNewGame = jquery__WEBPACK_IMPORTED_MODULE_1___default()('#create-game-template').html();
-      this.$templateStartGame = jquery__WEBPACK_IMPORTED_MODULE_1___default()('#start-game-template').html();
-      this.$templateJoinGame = jquery__WEBPACK_IMPORTED_MODULE_1___default()('#join-game-template').html();
-      this.$hostGame = jquery__WEBPACK_IMPORTED_MODULE_1___default()('#host-game-template').html();
-      this.$leaderGame = jquery__WEBPACK_IMPORTED_MODULE_1___default()('#leaderboard-template').html();
+      this.$templateIntroScreen = jquery__WEBPACK_IMPORTED_MODULE_2___default()('#intro-screen-template').html();
+      this.$templateNewGame = jquery__WEBPACK_IMPORTED_MODULE_2___default()('#create-game-template').html();
+      this.$templateStartGame = jquery__WEBPACK_IMPORTED_MODULE_2___default()('#start-game-template').html();
+      this.$templateJoinGame = jquery__WEBPACK_IMPORTED_MODULE_2___default()('#join-game-template').html();
+      this.$hostGame = jquery__WEBPACK_IMPORTED_MODULE_2___default()('#host-game-template').html();
+      this.$leaderGame = jquery__WEBPACK_IMPORTED_MODULE_2___default()('#leaderboard-template').html();
     }
   }, {
     key: "showInitScreen",
@@ -18600,8 +18600,8 @@ function () {
       this.$gameArea = document.getElementById("gameArea");
       this.gameType = document.getElementById("gameTypes").selectedIndex;
       this.answerType = document.getElementById("answerTypes").selectedIndex;
-      this.numPlayersInTotal = parseInt(jquery__WEBPACK_IMPORTED_MODULE_1___default()('#nUsers').val());
-      this.numQuestions = parseInt(jquery__WEBPACK_IMPORTED_MODULE_1___default()('#nQuestions').val());
+      this.numPlayersInTotal = parseInt(jquery__WEBPACK_IMPORTED_MODULE_2___default()('#nUsers').val());
+      this.numQuestions = parseInt(jquery__WEBPACK_IMPORTED_MODULE_2___default()('#nQuestions').val());
       this.selectedGenres = Object(_libs_utilitycode__WEBPACK_IMPORTED_MODULE_4__["getSelectedOptions"])(document.getElementById("selectedGenres")); //console.log("Clicked Start A Game with " + App.Host.gameType + App.Host.numPlayersInTotal);
 
       ioClient.socket.emit('hostCreateNewGame');
@@ -18631,7 +18631,7 @@ function () {
       //     App.Host.displayNewGameScreen();
       // }
       // Update host screen
-      jquery__WEBPACK_IMPORTED_MODULE_1___default()('#playersWaiting').append('<p>Player ' + serverData.playerName + ' joined the game.<p/>'); // Store the new player's data on the Host.
+      jquery__WEBPACK_IMPORTED_MODULE_2___default()('#playersWaiting').append('<p>Player ' + serverData.playerName + ' joined the game.<p/>'); // Store the new player's data on the Host.
 
       this.players.push(serverData); // Increment the number of players in the room
 
@@ -18676,8 +18676,8 @@ function () {
       helpers.countDown('hostMedia', 5, function () {
         ioClient.socket.emit('hostCountdownFinished', tempGameId);
       });
-      jquery__WEBPACK_IMPORTED_MODULE_1___default.a.each(this.players, function (index, value) {
-        jquery__WEBPACK_IMPORTED_MODULE_1___default()('#playerScores').append('<div id="player' + index++ + '" class="row playerScore"><span class="score"><i id="answer-icon' + value.mySocketId + '" class="glyphicon glyphicon-question-sign"></i></span><span id="' + value.mySocketId + '" class="score">0</span><span class="playerName">' + value.playerName + '</span></div>');
+      jquery__WEBPACK_IMPORTED_MODULE_2___default.a.each(this.players, function (index, value) {
+        jquery__WEBPACK_IMPORTED_MODULE_2___default()('#playerScores').append('<div id="player' + index++ + '" class="row playerScore" data-score="0" data-playername="' + value.playerName + '" ><span class="score"><i id="answer-icon' + value.mySocketId + '" class="glyphicon glyphicon-question-sign"></i></span><span id="' + value.mySocketId + '" class="score">0</span><span class="playerName">' + value.playerName + '</span></div>');
       }); // Set the Score section on screen to 0 for each player.
       // $('#player1Score').find('.score').attr('id',App.Host.players[0].mySocketId);
       // $('#player2Score').find('.score').attr('id',App.Host.players[1].mySocketId);
@@ -18691,21 +18691,21 @@ function () {
     key: "newWord",
     value: function newWord(data) {
       // Insert the new word into the DOM
-      jquery__WEBPACK_IMPORTED_MODULE_1___default()('#hostWord').html("<h3>" + data.word + "</h3>");
-      jquery__WEBPACK_IMPORTED_MODULE_1___default()('#hostSubText').text(data.subText); //App.doTextFit('#hostWord');
+      jquery__WEBPACK_IMPORTED_MODULE_2___default()('#hostWord').html("<h3>" + data.word + "</h3>");
+      jquery__WEBPACK_IMPORTED_MODULE_2___default()('#hostSubText').text(data.subText); //App.doTextFit('#hostWord');
       //Insert the Image
       //console.log(data.typeMedia);
 
       if (data.typeMedia == 'pic') {
         //$('body').css('backgroundImage','url('+data.urlMedia+')');
-        jquery__WEBPACK_IMPORTED_MODULE_1___default()('#hostMedia').html("<img id='image' class='object-fit_scale-down' src='" + data.urlMedia + "'>");
+        jquery__WEBPACK_IMPORTED_MODULE_2___default()('#hostMedia').html("<img id='image' class='object-fit_scale-down' src='" + data.urlMedia + "'>");
       }
 
       if (data.typeMedia == 'vid') {
-        jquery__WEBPACK_IMPORTED_MODULE_1___default()('#hostMedia').html("<div class='embed-container'><iframe id='youtubeplayer' onload='setTimeout(makeVisible, 4000);' src='" + data.urlMedia + "' frameborder='0' gesture='media' allow='autoplay;encrypted-media'></iframe></div>");
+        jquery__WEBPACK_IMPORTED_MODULE_2___default()('#hostMedia').html("<div class='embed-container'><iframe id='youtubeplayer' src='" + data.urlMedia + "' frameborder='0' gesture='media' allow='autoplay;encrypted-media'></iframe><div class='bar'></div></div>");
       }
 
-      jquery__WEBPACK_IMPORTED_MODULE_1___default()('#image').height(jquery__WEBPACK_IMPORTED_MODULE_1___default()(window).height() - jquery__WEBPACK_IMPORTED_MODULE_1___default()("#hostWord").height() - 30);
+      jquery__WEBPACK_IMPORTED_MODULE_2___default()('#image').height(jquery__WEBPACK_IMPORTED_MODULE_2___default()(window).height() - jquery__WEBPACK_IMPORTED_MODULE_2___default()("#hostWord").height() - 30);
       console.log("update the data"); // Update the data for the current round
 
       hostScreen.currentCorrectAnswer = data.answer;
@@ -18727,8 +18727,8 @@ function () {
 
       if (data.round === hostScreen.currentRound) {
         // Get the player's score
-        var $pScore = jquery__WEBPACK_IMPORTED_MODULE_1___default()('#' + data.playerId);
-        var $pIcon = jquery__WEBPACK_IMPORTED_MODULE_1___default()('#answer-icon' + data.playerId); //console.log($pScore);
+        var $pScore = jquery__WEBPACK_IMPORTED_MODULE_2___default()('#' + data.playerId);
+        var $pIcon = jquery__WEBPACK_IMPORTED_MODULE_2___default()('#answer-icon' + data.playerId); //console.log($pScore);
         // Advance player's score if it is correct
 
         var answerGiven = data.answer.toLowerCase().replace(/\s+/g, '');
@@ -18737,6 +18737,8 @@ function () {
         if (answerCorrect === answerGiven) {
           // Add 5 to the player's score
           $pScore.text(+$pScore.text() + 1);
+          $pScore.attr('data-score', $pScore.text()); //$pScore[0].setAttribute('data-score', $pScore.text() + 1);
+
           $pIcon.removeClass("glyphicon glyphicon-question-sign");
           $pIcon.removeClass("glyphicon glyphicon-remove");
           $pIcon.addClass("glyphicon glyphicon-ok"); //Increment Answered Players
@@ -18765,7 +18767,7 @@ function () {
         playerObject.playerScore++; //Check whether everybody answered so we can progress to the next round
 
         if (hostScreen.numPlayersInRoom == hostScreen.numAnswersGiven) {
-          jquery__WEBPACK_IMPORTED_MODULE_1___default()('#Answer').html('Het juiste antwoord was <b>' + hostScreen.currentCorrectAnswer + '</b>');
+          jquery__WEBPACK_IMPORTED_MODULE_2___default()('#Answer').html('Het juiste antwoord was <b>' + hostScreen.currentCorrectAnswer + '</b>');
           console.log("Next Round !"); // Advance the round
 
           hostScreen.currentRound += 1;
@@ -18793,6 +18795,44 @@ function () {
         }
       }
     }
+    /**
+     * All 10 rounds have played out. End the game.
+     * @param data
+     */
+
+  }, {
+    key: "endGame",
+    value: function endGame(data) {
+      Object(_libs_utilitycode__WEBPACK_IMPORTED_MODULE_4__["score_on"])();
+      var scoreboard = [];
+      var winnerName = '';
+      var winnerScore = -1;
+      jquery__WEBPACK_IMPORTED_MODULE_2___default()(".playerScore").each(function (index) {
+        console.log(index + ": " + this.children[1].getAttribute('data-score') + "&&&" + jquery__WEBPACK_IMPORTED_MODULE_2___default()(this).attr('data-playername'));
+        scoreboard.push(jquery__WEBPACK_IMPORTED_MODULE_2___default()(this).text(), jquery__WEBPACK_IMPORTED_MODULE_2___default()(this).score); // Find the winner based on the scores
+
+        if (Number(this.children[1].getAttribute('data-score')) > winnerScore) {
+          winnerName = jquery__WEBPACK_IMPORTED_MODULE_2___default()(this).attr('data-playername');
+          winnerScore = Number(this.children[1].getAttribute('data-score'));
+        }
+      }); //Clear the Game screen
+
+      jquery__WEBPACK_IMPORTED_MODULE_2___default()('#hostMedia').html("");
+      jquery__WEBPACK_IMPORTED_MODULE_2___default()('#Answer').html('And the winner is <b>' + winnerName + '</b>');
+      jquery__WEBPACK_IMPORTED_MODULE_2___default()('#countdownOverlay').html('with ' + winnerScore + ' points</b>'); //App.doTextFit('#hostWord');
+      //data.winner=winnerName;
+      //if(data.done>0)
+      //{
+      //}
+      //else data.done=0;
+      //console.log(data);
+      //IO.socket.emit("clientEndGame",data);
+      // Reset game data
+      //hostScreen.numPlayersInRoom = 0;
+      //hostScreen.isNewGame = true;
+      //IO.socket.emit('hostNextRound',data);
+      // Reset game data
+    }
   }]);
 
   return HostScreen;
@@ -18810,7 +18850,8 @@ function () {
     this.$gameArea = document.getElementById("gameArea");
     this.gameId = '';
     this.playerName = '';
-    this.currentRound = 0; //this.bindEvents();
+    this.currentRound = 0;
+    this.helpers = new Helpers(); //this.bindEvents();
   }
 
   _createClass(PlayerScreen, [{
@@ -18827,8 +18868,8 @@ function () {
     key: "onPlayerStartClick",
     value: function onPlayerStartClick() {
       console.log('Player clicked "Start"');
-      this.gameId = jquery__WEBPACK_IMPORTED_MODULE_1___default()('#inputGameId').val();
-      this.playerName = jquery__WEBPACK_IMPORTED_MODULE_1___default()('#inputPlayerName').val() || 'anon';
+      this.gameId = jquery__WEBPACK_IMPORTED_MODULE_2___default()('#inputGameId').val();
+      this.playerName = jquery__WEBPACK_IMPORTED_MODULE_2___default()('#inputPlayerName').val() || 'anon';
       var data = {
         gameId: this.gameId,
         playerName: this.playerName
@@ -18847,7 +18888,7 @@ function () {
   }, {
     key: "updateWaitingScreen",
     value: function updateWaitingScreen() {
-      jquery__WEBPACK_IMPORTED_MODULE_1___default()('#playerWaitingMessage').append('<p/>').text('Joined Game ' + this.gameId + '. Please wait for game to begin.');
+      jquery__WEBPACK_IMPORTED_MODULE_2___default()('#playerWaitingMessage').append('<p/>').text('Joined Game ' + this.gameId + '. Please wait for game to begin.');
       var elem = document.getElementById("btnStart");
       elem.remove();
     }
@@ -18860,7 +18901,7 @@ function () {
     key: "gameCountdown",
     value: function gameCountdown() {
       //App.Player.hostSocketId = hostData.mySocketId;
-      jquery__WEBPACK_IMPORTED_MODULE_1___default()('#gameArea').html('<div class="gameOver">Get Ready!</div>');
+      jquery__WEBPACK_IMPORTED_MODULE_2___default()('#gameArea').html('<div class="gameOver">Get Ready!</div>');
     }
     /**
      * Show the list of words for the current round.
@@ -18873,13 +18914,13 @@ function () {
       //set currentRound
       this.currentRound = data.round;
       Object(_libs_utilitycode__WEBPACK_IMPORTED_MODULE_4__["score_off"])();
-      jquery__WEBPACK_IMPORTED_MODULE_1___default()('#gameArea').html('<span id="countdownQuestion"></span><input id="inputAnswered" type="text" value="false" style="display:none" />');
+      jquery__WEBPACK_IMPORTED_MODULE_2___default()('#gameArea').html('<span id="countdownQuestion"></span><input id="inputAnswered" type="text" value="false" style="display:none" />');
 
       if (data.typeQuestion == 1) {
-        $answerField = " <div class='info'><label for='inputAnswer'>Your Answer:</label><input id='inputAnswer' type='text' /></div><button id='btnAnswer' class='btnSendAnswer btn'>SEND</button>";
-        jquery__WEBPACK_IMPORTED_MODULE_1___default()('#gameArea').append($answerField); // Set focus on the input field.
+        var $answerField = " <div class='info'><label for='inputAnswer'>Your Answer:</label><input id='inputAnswer' type='text' /></div><button id='btnAnswer' class='btnSendAnswer btn'>SEND</button>";
+        jquery__WEBPACK_IMPORTED_MODULE_2___default()('#gameArea').append($answerField); // Set focus on the input field.
 
-        jquery__WEBPACK_IMPORTED_MODULE_1___default()('#inputAnswer').focus();
+        jquery__WEBPACK_IMPORTED_MODULE_2___default()('#inputAnswer').focus();
         var el = document.getElementById("btnAnswer");
         el.addEventListener("click", function () {
           playerScreen.onPlayerAnswerSubmitClick();
@@ -18887,20 +18928,20 @@ function () {
       } else {
         console.log('Create an unordered list element'); // Create an unordered list element
 
-        var $list = jquery__WEBPACK_IMPORTED_MODULE_1___default()('<ul/>').attr('id', 'ulAnswers'); // Insert a list item for each word in the word list
+        var $list = jquery__WEBPACK_IMPORTED_MODULE_2___default()('<ul/>').attr('id', 'ulAnswers'); // Insert a list item for each word in the word list
         // received from the server.
 
-        jquery__WEBPACK_IMPORTED_MODULE_1___default.a.each(data.list, function () {
+        jquery__WEBPACK_IMPORTED_MODULE_2___default.a.each(data.list, function () {
           $list //  <ul> </ul>
-          .append(jquery__WEBPACK_IMPORTED_MODULE_1___default()('<li/>') //  <ul> <li> </li> </ul>
-          .append(jquery__WEBPACK_IMPORTED_MODULE_1___default()('<button/>') //  <ul> <li> <button> </button> </li> </ul>
+          .append(jquery__WEBPACK_IMPORTED_MODULE_2___default()('<li/>') //  <ul> <li> </li> </ul>
+          .append(jquery__WEBPACK_IMPORTED_MODULE_2___default()('<button/>') //  <ul> <li> <button> </button> </li> </ul>
           .addClass('btnAnswer') //  <ul> <li> <button class='btnAnswer'> </button> </li> </ul>
           .addClass('btn') //  <ul> <li> <button class='btnAnswer'> </button> </li> </ul>
           .val(this) //  <ul> <li> <button class='btnAnswer' value='word'> </button> </li> </ul>                                                      //  <ul> <li> <button class='btnAnswer' value='word'>word</button> </li> </ul>
-          .append(jquery__WEBPACK_IMPORTED_MODULE_1___default()('<div/>').addClass('jtextfill').append(jquery__WEBPACK_IMPORTED_MODULE_1___default()('<span/>').html(this)))));
+          .append(jquery__WEBPACK_IMPORTED_MODULE_2___default()('<div/>').addClass('jtextfill').append(jquery__WEBPACK_IMPORTED_MODULE_2___default()('<span/>').html(this)))));
         }); // Insert the list onto the screen.
 
-        jquery__WEBPACK_IMPORTED_MODULE_1___default()('#gameArea').append($list);
+        jquery__WEBPACK_IMPORTED_MODULE_2___default()('#gameArea').append($list);
 
         var _el = document.getElementsByClassName("btnAnswer");
 
@@ -18918,9 +18959,8 @@ function () {
       } //var $secondsLeft = $('#countdownQuestion');
 
 
-      var helpers = new Helpers();
-      helpers.countDown('countdownQuestion', 10, function () {
-        if (jquery__WEBPACK_IMPORTED_MODULE_1___default()('#inputAnswered').val() == 'false') {
+      this.helpers.countDown('countdownQuestion', 20, function () {
+        if (jquery__WEBPACK_IMPORTED_MODULE_2___default()('#inputAnswered').val() == 'false') {
           if (data.typeQuestion == 1) {
             playerScreen.onPlayerAnswerSubmitClick();
           } else {
@@ -18938,14 +18978,14 @@ function () {
     value: function onPlayerAnswerClick(Answer) {
       console.log('Clicked Answer Button'); // Stop the timer and do the callback.
 
-      clearInterval(playerScreen.countdownTimer); //var $btn = $(this);      // the tapped button
+      clearInterval(this.helpers.countdownTimerId); //var $btn = $(this);      // the tapped button
 
       var answer = Answer === 'tooLate' ? '' : Answer; // The tapped word
       // Replace the answers with a thank you message to prevent further answering
 
-      jquery__WEBPACK_IMPORTED_MODULE_1___default()('#gameArea').html('<div class="gameOver">Thanks!</div>'); // Set the helperfield to true so we know that the user already answered     
+      jquery__WEBPACK_IMPORTED_MODULE_2___default()('#gameArea').html('<div class="gameOver">Thanks!</div>'); // Set the helperfield to true so we know that the user already answered     
 
-      jquery__WEBPACK_IMPORTED_MODULE_1___default()('#inputAnswered').val('true'); // Send the player info and tapped word to the server so
+      jquery__WEBPACK_IMPORTED_MODULE_2___default()('#inputAnswered').val('true'); // Send the player info and tapped word to the server so
       // the host can check the answer.
 
       var data = {
@@ -18966,14 +19006,14 @@ function () {
     value: function onPlayerAnswerSubmitClick() {
       console.log('Clicked Answer Button'); // Stop the timer and do the callback.
 
-      clearInterval(playerScreen.countdownTimer); //var $btn = $(this);      // the tapped button
+      clearInterval(this.helpers.countdownTimerId); //var $btn = $(this);      // the tapped button
       //var answer = $btn.val(); // The tapped word
 
-      var answer = jquery__WEBPACK_IMPORTED_MODULE_1___default()('#inputAnswer').val(); // Replace the answers with a thank you message to prevent further answering
+      var answer = jquery__WEBPACK_IMPORTED_MODULE_2___default()('#inputAnswer').val(); // Replace the answers with a thank you message to prevent further answering
 
-      jquery__WEBPACK_IMPORTED_MODULE_1___default()('#gameArea').html('<div class="gameOver">Thanks!</div>'); // Set the helperfield to true so we know that the user already answered     
+      jquery__WEBPACK_IMPORTED_MODULE_2___default()('#gameArea').html('<div class="gameOver">Thanks!</div>'); // Set the helperfield to true so we know that the user already answered     
 
-      jquery__WEBPACK_IMPORTED_MODULE_1___default()('#inputAnswered').val('true'); // Send the player info and tapped word to the server so
+      jquery__WEBPACK_IMPORTED_MODULE_2___default()('#inputAnswered').val('true'); // Send the player info and tapped word to the server so
       // the host can check the answer.
 
       var data = {
@@ -18983,6 +19023,16 @@ function () {
         round: playerScreen.currentRound
       };
       ioClient.socket.emit('playerAnswer', data);
+    }
+    /**
+     * Show the "Game Over" screen.
+     */
+
+  }, {
+    key: "endGame",
+    value: function endGame() {
+      jquery__WEBPACK_IMPORTED_MODULE_2___default()('#gameArea').html('<div class="gameOver">Game Over!</div>').append( // Create a button to start a new game.
+      jquery__WEBPACK_IMPORTED_MODULE_2___default()('<button>Start Again</button>').attr('id', 'btnPlayerRestart').addClass('btn').addClass('btnGameOver'));
     }
   }]);
 
@@ -19008,8 +19058,8 @@ function () {
       this.socket.on('playerJoinedRoom', this.playerJoinedRoom);
       this.socket.on('beginNewGame', this.beginNewGame);
       this.socket.on('newWordData', this.onNewWordData);
-      this.socket.on('hostCheckAnswer', this.hostCheckAnswer); // this.socket.on('gameOver', this.gameOver);
-      // this.socket.on('error', this.error );
+      this.socket.on('hostCheckAnswer', this.hostCheckAnswer);
+      this.socket.on('gameOver', this.gameOver); // this.socket.on('error', this.error );
       // this.socket.on('showLeader',this.showLeader);
     }
     /**
@@ -19097,7 +19147,23 @@ function () {
   }, {
     key: "hostCheckAnswer",
     value: function hostCheckAnswer(data) {
-      hostScreen.checkAnswer(data);
+      if (quiz.roleScreen == 'Host') {
+        hostScreen.checkAnswer(data);
+      }
+    }
+    /**
+     * Let everyone know the game has ended.
+     * @param data
+     */
+
+  }, {
+    key: "gameOver",
+    value: function gameOver(data) {
+      if (quiz.roleScreen == 'Host') {
+        hostScreen.endGame(data);
+      } else {
+        playerScreen.endGame(data);
+      }
     }
   }]);
 
@@ -19109,6 +19175,8 @@ var Helpers =
 function () {
   function Helpers() {
     _classCallCheck(this, Helpers);
+
+    this.countdownTimerId = 0;
   }
   /**
    * Display the countdown timer on the Host screen
@@ -19142,6 +19210,7 @@ function () {
           return;
         }
       }, 1000);
+      this.countdownTimerId = countdownTimer;
     }
   }]);
 
@@ -19151,8 +19220,7 @@ function () {
 var ioClient = new IO();
 var quiz = new Quiz(ioClient);
 var hostScreen = new HostScreen(ioClient);
-var playerScreen = new PlayerScreen(ioClient); //let helpers = new Helpers();
-
+var playerScreen = new PlayerScreen(ioClient);
 console.log('End');
 
 /***/ }),

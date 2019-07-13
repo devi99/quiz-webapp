@@ -1,8 +1,12 @@
+
+
 class IO {
     constructor() {
-        this.socket = io.connect();
+        this.socket = io.connect('https://qwizz-api.herokuapp.com');
         this.bindEvents();
         this.socketId;
+        this.hostScreen;
+        this.playerScreen;
     }
 
     bindEvents() {
@@ -11,8 +15,8 @@ class IO {
         this.socket.on('playerJoinedRoom', this.playerJoinedRoom );
         this.socket.on('beginNewGame', this.beginNewGame );
         this.socket.on('newWordData', this.onNewWordData);
-        // this.socket.on('hostCheckAnswer', this.hostCheckAnswer);
-        // this.socket.on('gameOver', this.gameOver);
+        this.socket.on('hostCheckAnswer', this.hostCheckAnswer);
+        this.socket.on('gameOver', this.gameOver);
         // this.socket.on('error', this.error );
         // this.socket.on('showLeader',this.showLeader);
     }
@@ -25,7 +29,7 @@ class IO {
         //App.mySocketId = this.socket.socket.sessionid;
         //App.mySocketId = this.socket.id;
         this.socketId = this.id;
-        console.log(data.message + " socketId= " + this.id );            
+        console.log(data.message + " socketId= " + this.id );  
     }
 
     /**
@@ -77,6 +81,36 @@ class IO {
         hostScreen.currentRound = data.round;
 
         // Change the word for the Host and Player
-        App[App.myRole].newWord(data);
+        //App[App.myRole].newWord(data);
+        if (quiz.roleScreen == 'Host') {
+            hostScreen.newWord(data);
+        }else{
+            playerScreen.newWord(data);
+        }
+    }
+
+    /**
+     * A player answered. If this is the host, check the answer.
+     * @param data
+     */
+    hostCheckAnswer(data) {
+        if (quiz.roleScreen == 'Host') {
+            hostScreen.checkAnswer(data);
+        }
+
+    }
+
+    /**
+     * Let everyone know the game has ended.
+     * @param data
+     */
+    gameOver(data) {
+        if (quiz.roleScreen == 'Host') {
+            hostScreen.endGame(data);
+        }else{
+            playerScreen.endGame(data);
+        }
     }
 }
+
+export { IO as default}
