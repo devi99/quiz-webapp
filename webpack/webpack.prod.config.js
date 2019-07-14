@@ -1,6 +1,8 @@
 const path = require("path")
 const webpack = require('webpack')
 const HtmlWebPackPlugin = require("html-webpack-plugin")
+const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin')
+
 module.exports = {
   entry: {
     main: './src/app.js'
@@ -45,6 +47,15 @@ module.exports = {
       template: "./src/html/index.html",
       filename: "./index.html",
       excludeChunks: [ 'server' ]
+    }),
+    new HtmlWebpackExternalsPlugin({
+      externals: [
+        {
+          module: 'socket.io',
+          entry: 'https://qwizz-api.herokuapp.com/socket.io/socket.io.js',
+          global: 'io',
+        }
+      ],
     })
   ]
 }
