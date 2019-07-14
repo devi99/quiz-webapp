@@ -18476,6 +18476,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var bootstrap_dist_css_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! bootstrap/dist/css/bootstrap.min.css */ "./node_modules/bootstrap/dist/css/bootstrap.min.css");
 /* harmony import */ var bootstrap_dist_css_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(bootstrap_dist_css_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _libs_utilitycode__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./libs/utilitycode */ "./src/libs/utilitycode.js");
+/* harmony import */ var _html_quiz__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./html/quiz */ "./src/html/quiz.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -18483,6 +18484,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 //import io from 'socket.io'
+
 
 
 
@@ -18521,18 +18523,19 @@ function () {
     value: function cacheElements() {
       this.$doc = jquery__WEBPACK_IMPORTED_MODULE_2___default()(document); //this.$gameArea = $('#gameArea');
 
-      this.$gameArea = document.getElementById("gameArea");
-      this.$templateIntroScreen = jquery__WEBPACK_IMPORTED_MODULE_2___default()('#intro-screen-template').html();
-      this.$templateNewGame = jquery__WEBPACK_IMPORTED_MODULE_2___default()('#create-game-template').html();
-      this.$templateStartGame = jquery__WEBPACK_IMPORTED_MODULE_2___default()('#start-game-template').html();
-      this.$templateJoinGame = jquery__WEBPACK_IMPORTED_MODULE_2___default()('#join-game-template').html();
-      this.$hostGame = jquery__WEBPACK_IMPORTED_MODULE_2___default()('#host-game-template').html();
-      this.$leaderGame = jquery__WEBPACK_IMPORTED_MODULE_2___default()('#leaderboard-template').html();
+      this.$gameArea = document.getElementById("gameArea"); //this.$templateIntroScreen = $('#intro-screen-template').html();
+
+      this.$templateIntroScreen = _html_quiz__WEBPACK_IMPORTED_MODULE_5__["introScreenTemplate"];
+      this.$templateNewGame = _html_quiz__WEBPACK_IMPORTED_MODULE_5__["createGameTemplate"];
+      this.$templateStartGame = _html_quiz__WEBPACK_IMPORTED_MODULE_5__["startGameTemplate"];
+      this.$templateJoinGame = _html_quiz__WEBPACK_IMPORTED_MODULE_5__["joinGameTemplate"];
+      this.$hostGame = _html_quiz__WEBPACK_IMPORTED_MODULE_5__["hostGameTemplate"];
+      this.$leaderGame = _html_quiz__WEBPACK_IMPORTED_MODULE_5__["leaderboardTemplate"];
     }
   }, {
     key: "showInitScreen",
     value: function showInitScreen() {
-      this.$gameArea.innerHTML = document.getElementById("intro-screen-template").innerHTML; //App.doTextFit('.title');
+      this.$gameArea.innerHTML = _html_quiz__WEBPACK_IMPORTED_MODULE_5__["introScreenTemplate"]; //App.doTextFit('.title');
     }
   }, {
     key: "bindEvents",
@@ -18554,7 +18557,7 @@ function () {
     value: function onJoinClick() {
       console.log("Clicked Join A Game ");
       this.roleScreen = 'Player';
-      this.$gameArea.innerHTML = document.getElementById("join-game-template").innerHTML;
+      this.$gameArea.innerHTML = _html_quiz__WEBPACK_IMPORTED_MODULE_5__["joinGameTemplate"];
       var el = document.getElementById("btnStart");
       el.addEventListener("click", function () {
         playerScreen.onPlayerStartClick();
@@ -18566,7 +18569,7 @@ function () {
       console.log("Clicked Create A Game ");
       this.roleScreen = 'Host'; // Fill the game screen with the appropriate HTML
 
-      this.$gameArea.innerHTML = document.getElementById("create-game-template").innerHTML;
+      this.$gameArea.innerHTML = _html_quiz__WEBPACK_IMPORTED_MODULE_5__["createGameTemplate"];
       Object(_libs_utilitycode__WEBPACK_IMPORTED_MODULE_4__["setGenreOptions"])();
       var el = document.getElementById("btnStartGame");
       el.addEventListener("click", function () {
@@ -18611,7 +18614,7 @@ function () {
     value: function displayStartGameScreen(data) {
       this.gameId = data.gameId; // Fill the game screen with the appropriate HTML
 
-      this.$gameArea.innerHTML = document.getElementById("start-game-template").innerHTML; // Display the URL on screen
+      this.$gameArea.innerHTML = _html_quiz__WEBPACK_IMPORTED_MODULE_5__["startGameTemplate"]; // Display the URL on screen
 
       document.getElementById("gameURL").innerText = window.location.href; //App.doTextFit('#gameURL');
       // Show the gameId / room id on screen
@@ -18667,7 +18670,7 @@ function () {
     value: function gameCountdown() {
       console.log('gamecountdown started...'); // Prepare the game screen with new HTML
 
-      this.$gameArea.innerHTML = document.getElementById("host-game-template").innerHTML; //App.doTextFit('#hostWord');
+      this.$gameArea.innerHTML = _html_quiz__WEBPACK_IMPORTED_MODULE_5__["hostGameTemplate"]; //App.doTextFit('#hostWord');
       // Begin the on-screen countdown timer
       //var $secondsLeft = $('#hostMedia');
 
@@ -19252,6 +19255,35 @@ var update = __webpack_require__(/*! ../../node_modules/style-loader/lib/addStyl
 if(content.locals) module.exports = content.locals;
 
 if(false) {}
+
+/***/ }),
+
+/***/ "./src/html/quiz.js":
+/*!**************************!*\
+  !*** ./src/html/quiz.js ***!
+  \**************************/
+/*! exports provided: introScreenTemplate, createGameTemplate, startGameTemplate, joinGameTemplate, hostGameTemplate, leaderboardTemplate */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "introScreenTemplate", function() { return introScreenTemplate; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createGameTemplate", function() { return createGameTemplate; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "startGameTemplate", function() { return startGameTemplate; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "joinGameTemplate", function() { return joinGameTemplate; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hostGameTemplate", function() { return hostGameTemplate; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "leaderboardTemplate", function() { return leaderboardTemplate; });
+//Main Title Screen that appears when the page loads for the first time
+var introScreenTemplate = "\n<div class=\"row\">\n    <div class=\"buttons\">            \n        <button id=\"btnCreateGame\" class=\"btn left\">CREATE</button>                \n        <button id=\"btnJoinGame\" class=\"btn right\">JOIN</button>\n    </div>\n</div>\n<div class=\"row\">\n    <div class=\"titleWrapper\">\n        <div class=\"title\">\n            kwispel 2.0 !\n        </div>\n    </div>\n</div>\n"; // This screen appears when a user clicks "CREATE" on the Title Screen -->
+
+var createGameTemplate = "\n    <section>\n        <div class=\"container\">\n          <div class=\"row\">\n            <div class=\"col-lg-3 col-md-6 text-center\">\n              <div class=\"service-box mt-5 mx-auto\">\n                <i class=\"fas fa-4x fa-gem text-primary mb-3 sr-icon-1\"></i>\n                <h3 class=\"mb-3\">Gametype:</h3>\n                  <select id=\"gameTypes\" class=\"form-control\">\n                      <option value=\"1\">Fast Game</option>\n                      <option value=\"2\">Turn-based Game</option>\n                  </select>\n              </div>\n            </div>\n            <div class=\"col-lg-3 col-md-6 text-center\">\n              <div class=\"service-box mt-5 mx-auto\">\n                <i class=\"fas fa-4x fa-paper-plane text-primary mb-3 sr-icon-2\"></i>\n                <h3 class=\"mb-3\">Number of users:</h3>\n                  <input type=\"number\" id=\"nUsers\" class=\"form-control\" value=\"1\">\n              </div>\n            </div>\n            <div class=\"col-lg-3 col-md-6 text-center\">\n              <div class=\"service-box mt-5 mx-auto\">\n                <i class=\"fas fa-4x fa-code text-primary mb-3 sr-icon-3\"></i>\n                <h3 class=\"mb-3\">Number of Questions: </h3>\n                  <input type=\"number\" id=\"nQuestions\" class=\"form-control\" value=\"4\">                  \n              </div>\n            </div>\n            <div class=\"col-lg-3 col-md-6 text-center\">\n              <div class=\"service-box mt-5 mx-auto\">\n                <i class=\"fas fa-4x fa-code text-primary mb-3 sr-icon-3\"></i>\n                <h3 class=\"mb-3\">Genres: </h3>\n                  <select id=\"selectedGenres\" class=\"mdb-select md-form\" multiple>\n                  </select>        \n              </div>\n            </div>          \n          </div>\n        </div>\n          <div class=\"container\">\n          <div class=\"row\">\n            <div class=\"col-lg-3 col-md-6 text-center\">\n              <div class=\"service-box mt-5 mx-auto\">\n                <i class=\"fas fa-4x fa-gem text-primary mb-3 sr-icon-1\"></i>\n                <h3 class=\"mb-3\">Type of Answer:</h3>\n                  <select id=\"answerTypes\" class=\"form-control\">\n                      <option value=\"1\">Multiple Choice</option>\n                      <option value=\"2\">Text Input</option>\n                  </select>\n              </div>\n            </div>      \n          </div>\n        </div>\n        <div class=\"container\">\n          <div class=\"row\">\n            <div class=\"col-lg-12 text-center\">\n              <hr class=\"my-4\">          \n              <div class=\"buttons\">\n              <button id=\"btnStartGame\" class=\"btn\">START</button>\n              <div style=\"clear:both\"></div>\n              </div>   \n            </div>\n          </div>\n        </div>      \n      </section>\n"; //<!-- This screen appears when a user clicks "START" on the Title Screen -->
+
+var startGameTemplate = "\n    <div class=\"startGameWrapper\">\n\n        <div class=\"info\">Open this site on your mobile device:</div>\n        <div id=\"gameURL\" class=\"infoBig\">Error!</div>\n\n        <div class=\"info\">Then click <strong>JOIN</strong> and <br/> enter the following Game ID:</div>\n        <div id=\"spanNewGameCode\" class=\"gameId\">Error!</div>\n\n        <div id=\"playersWaiting\"></div>\n\n        <div class=\"info buttons\">\n            <button id=\"btnStartAnyway\" class=\"btn\">Start Anyway!</button>\n        </div>\n    </div>\n    "; //<!-- This scrreen appears when a player clicks "JOIN" on the Title Screen -->
+
+var joinGameTemplate = "\n    <div class=\"joinGameWrapper\">\n        <div class=\"info\">\n            <label for=\"inputPlayerName\">Your Name:</label>\n            <input id=\"inputPlayerName\" type=\"text\" value=\"davy\"/>\n        </div>\n  \n        <div class=\"info\">\n            <label for=\"inputGameId\">Game ID:</label>\n            <input id=\"inputGameId\" type=\"text\"/>\n        </div>\n  \n        <div class=\"info buttons\">\n            <button id=\"btnStart\" class=\"btn\">Start</button>\n            <div id=\"playerWaitingMessage\"></div>\n        </div>\n      </div>\n"; //<!-- This is the 'Host' screen. It displays the word for each player to match -->
+
+var hostGameTemplate = "\n    <div id=\"playerScores\" onclick=\"score_off()\">\n        <h3 id=\"Answer\"></h3>\n        <h2 id=\"countdownOverlay\"></h2>\n      </div>\n      <div class=\"row\">\n        <div class=\"col-sm-2\"></div>\n        <div id=\"wordArea\" class=\"col-sm-8\">     \n          <div id=\"hostWord\"></div>\n        </div> \n        <div class=\"col-sm-2\"></div>\n      </div>\n      <div class=\"row\">\n        <div id=\"hostMedia\" class=\"col-sm-12\">\n                <!-- <iframe width=\"100%\" height=\"500\" src=\"https://www.youtube.com/embed/VOcABtJTpho?rel=0&amp;controls=0&amp;showinfo=0&amp;autoplay=1\" frameborder=\"0\" gesture=\"media\" allow=\"encrypted-media\" allowfullscreen></iframe> -->\n                <!-- <img  src=\"http://www.lawyersgunsmoneyblog.com/wp-content/uploads/2015/12/nbc-fires-donald-trump-after-he-calls-mexicans-rapists-and-drug-runners.jpg\" /> -->\n        </div> \n      </div>\n";
+var leaderboardTemplate = "";
 
 /***/ }),
 

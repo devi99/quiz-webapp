@@ -4,6 +4,7 @@ import './css/styles.css';
 import $ from 'jquery';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { setGenreOptions, getSelectedOptions, score_on, score_off} from './libs/utilitycode';
+import * as htmlTemplate from './html/quiz';
 
 
   (function () {
@@ -34,17 +35,18 @@ class Quiz {
         this.$doc = $(document);
         //this.$gameArea = $('#gameArea');
         this.$gameArea  = document.getElementById("gameArea");
-        this.$templateIntroScreen = $('#intro-screen-template').html();
-        this.$templateNewGame = $('#create-game-template').html();
-        this.$templateStartGame = $('#start-game-template').html();
-        this.$templateJoinGame = $('#join-game-template').html();
-        this.$hostGame = $('#host-game-template').html();
-        this.$leaderGame = $('#leaderboard-template').html();
+        //this.$templateIntroScreen = $('#intro-screen-template').html();
+        this.$templateIntroScreen = htmlTemplate.introScreenTemplate;
+        this.$templateNewGame = htmlTemplate.createGameTemplate;
+        this.$templateStartGame = htmlTemplate.startGameTemplate;
+        this.$templateJoinGame = htmlTemplate.joinGameTemplate;
+        this.$hostGame = htmlTemplate.hostGameTemplate;
+        this.$leaderGame = htmlTemplate.leaderboardTemplate;
     }
 
     showInitScreen() {
         
-        this.$gameArea.innerHTML = document.getElementById("intro-screen-template").innerHTML;
+        this.$gameArea.innerHTML = htmlTemplate.introScreenTemplate;
         //App.doTextFit('.title');
     }
 
@@ -59,7 +61,7 @@ class Quiz {
     onJoinClick() {
         console.log("Clicked Join A Game ");
         this.roleScreen = 'Player';
-        this.$gameArea.innerHTML = document.getElementById("join-game-template").innerHTML;
+        this.$gameArea.innerHTML = htmlTemplate.joinGameTemplate;
         let el = document.getElementById("btnStart");
         el.addEventListener("click", () => { playerScreen.onPlayerStartClick(); }, false);
         //App.Host.displayNewGameScreen();
@@ -69,7 +71,7 @@ class Quiz {
         console.log("Clicked Create A Game ");
         this.roleScreen = 'Host';
         // Fill the game screen with the appropriate HTML
-        this.$gameArea.innerHTML = document.getElementById("create-game-template").innerHTML;
+        this.$gameArea.innerHTML = htmlTemplate.createGameTemplate;
         setGenreOptions();
         let el = document.getElementById("btnStartGame");
         el.addEventListener("click", () => { hostScreen.processQuizInitData(); }, false);
@@ -103,7 +105,7 @@ class HostScreen{
         this.gameId = data.gameId;
 
         // Fill the game screen with the appropriate HTML
-        this.$gameArea.innerHTML = document.getElementById("start-game-template").innerHTML;
+        this.$gameArea.innerHTML = htmlTemplate.startGameTemplate;
 
         // Display the URL on screen
         document.getElementById("gameURL").innerText = window.location.href;
@@ -163,7 +165,7 @@ class HostScreen{
 
         console.log('gamecountdown started...');   
         // Prepare the game screen with new HTML
-        this.$gameArea.innerHTML = document.getElementById("host-game-template").innerHTML;
+        this.$gameArea.innerHTML = htmlTemplate.hostGameTemplate;
         
         //App.doTextFit('#hostWord');
 
