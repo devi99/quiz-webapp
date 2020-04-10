@@ -63,3 +63,4 @@ typings/
 
 # test distribution folder
 /test
+.env.development
