@@ -1,11 +1,10 @@
-//import io from 'socket.io'
+import ServerEventsDispatcher from './libs/serverEventsDispatcher';
 import 'bootstrap';
 import './css/styles.css';
 import $ from 'jquery';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { setGenreOptions, getSelectedOptions, score_on, score_off} from './libs/utilitycode';
 import * as htmlTemplate from './html/quiz';
-
 
   (function () {
     var fullPath = window.location.pathname.substr(window.location.pathname.indexOf('/') + 1); // and split it into an array
@@ -96,6 +95,7 @@ class HostScreen{
         this.numPlayersInTotal = parseInt($('#nUsers').val());
         this.numQuestions = parseInt($('#nQuestions').val());
         this.selectedGenres = getSelectedOptions(document.getElementById("selectedGenres"));
+
         //console.log("Clicked Start A Game with " + App.Host.gameType + App.Host.numPlayersInTotal);
         ioClient.socket.emit('hostCreateNewGame');
     }
@@ -179,7 +179,7 @@ class HostScreen{
         
         $.each(this.players, function(index,value){
             $('#playerScores')
-                .append('<div id="player'+ index++ +'" class="row playerScore" data-score="0" data-playername="'+ value.playerName +'" ><span class="score"><i id="answer-icon'+ value.mySocketId +'" class="glyphicon glyphicon-question-sign"></i></span><span id="'+ value.mySocketId +'" class="score">0</span><span class="playerName">'+ value.playerName +'</span></div>');
+                .append('<div id="player'+ index++ +'" class="row playerScore" data-score="0" data-playername="'+ value.playerName +'" ><span class="score"><i id="answer-icon'+ value.playerId +'" class="glyphicon glyphicon-question-sign"></i></span><span id="'+ value.playerId +'" class="score">0</span><span class="playerName">'+ value.playerName +'</span></div>');
         });
 
         // Set the Score section on screen to 0 for each player.
@@ -262,7 +262,7 @@ class HostScreen{
                 gameOver: false
             }
             console.log('data.round=' + newdata.round);
-            var playerObject = hostScreen.players.filter( obj => obj.mySocketId === data.playerId)[0];
+            var playerObject = hostScreen.players.filter( obj => obj.playerId === data.playerId)[0];
             playerObject.playerScore++;
             //Check whether everybody answered so we can progress to the next round
             if(hostScreen.numPlayersInRoom == hostScreen.numAnswersGiven){
@@ -352,6 +352,7 @@ class PlayerScreen{
         this.$gameArea  = document.getElementById("gameArea");
         this.gameId = '';
         this.playerName = '';
+        this.playerId = '';
         this.currentRound = 0;
         this.helpers = new Helpers();
 
@@ -373,10 +374,12 @@ class PlayerScreen{
 
         this.gameId = $('#inputGameId').val();
         this.playerName = $('#inputPlayerName').val() || 'anon';
-        
+        this.playerId = Math.floor(Math.random() * 1000);
+
         var data = {
             gameId : this.gameId,
-            playerName : this.playerName
+            playerName : this.playerName,
+            playerId : this.playerId
         };
 
         // Send the gameId and playerName to the server
@@ -384,7 +387,6 @@ class PlayerScreen{
 
         // Set the appropriate properties for the current player.
         this.myRole = 'Player';
-        this.myName = data.playerName;
         
     }
 
@@ -510,7 +512,7 @@ class PlayerScreen{
         // the host can check the answer.
         var data = {
             gameId: playerScreen.gameId,
-            playerId: playerScreen.ioClient.socket.id,
+            playerId: playerScreen.playerId,
             answer: answer,
             round: playerScreen.currentRound
         };
@@ -542,7 +544,7 @@ class PlayerScreen{
         // the host can check the answer.
         var data = {
             gameId: playerScreen.gameId,
-            playerId: playerScreen.ioClient.socket.id,
+            playerId: playerScreen.playerId,
             answer: answer,
             round: playerScreen.currentRound
         };
@@ -569,24 +571,29 @@ class PlayerScreen{
 
 class IO {
     constructor() {
-        this.socket = io.connect('https://qwizz-api.herokuapp.com');
-
+        this.socket = new ServerEventsDispatcher('ws://qwizz-socket.herokuapp.com');
         this.bindEvents();
         this.socketId;
     }
 
     bindEvents() {
-        this.socket.on('connected', this.onConnected );
-        this.socket.on('newGameCreated', this.gameInit );
-        this.socket.on('playerJoinedRoom', this.playerJoinedRoom );
-        this.socket.on('beginNewGame', this.beginNewGame );
-        this.socket.on('newWordData', this.onNewWordData);
-        this.socket.on('hostCheckAnswer', this.hostCheckAnswer);
-        this.socket.on('gameOver', this.gameOver);
+        this.socket.bind('connected', this.onConnected );
+        // this.socket.on('connected', this.onConnected );
+        this.socket.bind('newGameCreated', this.gameInit );
+        this.socket.bind('playerJoinedRoom', this.playerJoinedRoom );
+        this.socket.bind('beginNewGame', this.beginNewGame );
+        this.socket.bind('newWordData', this.onNewWordData);
+        this.socket.bind('hostCheckAnswer', this.hostCheckAnswer);
+        this.socket.bind('gameOver', this.gameOver);
+        this.socket.bind('close', this.onClose );    
         // this.socket.on('error', this.error );
         // this.socket.on('showLeader',this.showLeader);
     }
 
+    onClose(){
+        this.socket.reconnect();
+        //bindEvents();
+    }
     /**
      * The client is successfully connected!
      */
@@ -594,8 +601,9 @@ class IO {
         // Cache a copy of the client's socket.this sessthisn ID on the App
         //App.mySocketId = this.socket.socket.sessionid;
         //App.mySocketId = this.socket.id;
-        this.socketId = this.id;
-        console.log(data.message + " socketId= " + this.id );            
+        this.socketId = data.id;
+        //console.log(data.message + " socketId= " + this.id );
+        console.log("connected");            
     }
 
     /**

@@ -21,24 +21,26 @@
   },
   "homepage": "https://github.com/devi99/quiz-webapp#readme",
   "dependencies": {
-    "bootstrap": "^4.3.1",
+    "bootstrap": "^4.4.1",
+    "dotenv-webpack": "^1.7.0",
     "express": "^4.17.1",
-    "jquery": "^3.4.1",
-    "popper.js": "^1.15.0"
+    "fs": "0.0.1-security",
+    "jquery": "^3.5.0",
+    "popper.js": "^1.16.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.5.4",
-    "@babel/preset-env": "^7.5.4",
-    "babel-loader": "^8.0.6",
-    "css-loader": "^3.0.0",
-    "file-loader": "^4.0.0",
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
+    "babel-loader": "^8.1.0",
+    "css-loader": "^3.5.2",
+    "file-loader": "^4.3.0",
     "html-loader": "^0.5.5",
     "html-webpack-externals-plugin": "^3.8.0",
     "html-webpack-plugin": "^3.2.0",
-    "lodash": "^4.17.14",
+    "lodash": "^4.17.15",
     "style-loader": "^0.23.1",
-    "webpack": "^4.35.3",
-    "webpack-cli": "^3.3.5",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
     "webpack-node-externals": "^1.7.2"
   }
 }

@@ -3,6 +3,7 @@ const webpack = require('webpack')
 const HtmlWebPackPlugin = require("html-webpack-plugin")
 const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin')
 
+
 module.exports = {
   entry: {
     main: './src/app.js'
