@@ -571,7 +571,8 @@ class PlayerScreen{
 
 class IO {
     constructor() {
-        this.socket = new ServerEventsDispatcher('wss://qwizz-socket.herokuapp.com');
+        //this.socket = new ServerEventsDispatcher('wss://qwizz-socket.herokuapp.com');
+        this.socket = new ServerEventsDispatcher('ws://localhost:8080');
         this.bindEvents();
         this.socketId;
     }

@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "rm -rf dist && webpack --mode production --config ./webpack/webpack.server.config.js && webpack --mode production --config ./webpack/webpack.prod.config.js",
-    "buildTest": "rm -rf test && webpack --mode development --config ./webpack/webpack.server.config.js && webpack --mode development --config ./webpack/webpack.dev.config.js",
+    "buildTest": "webpack --mode development --config ./webpack/webpack.dev.config.js",
     "start": "node ./dist/server.js",
-    "startTest": "node ./test/server.js",
+    "startTest": "node ./server/server-dev.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,6 +22,8 @@
   "homepage": "https://github.com/devi99/quiz-webapp#readme",
   "dependencies": {
     "bootstrap": "^4.4.1",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^5.1.1",
     "dotenv-webpack": "^1.7.0",
     "express": "^4.17.1",
     "fs": "0.0.1-security",
