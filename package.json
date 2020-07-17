@@ -39,7 +39,7 @@
     "html-loader": "^0.5.5",
     "html-webpack-externals-plugin": "^3.8.0",
     "html-webpack-plugin": "^3.2.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "style-loader": "^0.23.1",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
